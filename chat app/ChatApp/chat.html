@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+        }
+
+        .chat-page {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #1e1e1e; /* Slightly lighter dark background */
+            border: 1px solid #333; /* Subtle border */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #252525; /* Dark header background */
+            color: #ffffff; /* White text */
+            padding: 15px;
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #181818; /* Slightly lighter dark background */
+            border-bottom: 1px solid #333;
+        }
+
+        .messages p {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #25d366; /* WhatsApp green for user message */
+            color: #000; /* Dark text for contrast */
+            margin-left: auto;
+        }
+
+        .contact-message {
+            background-color: #333; /* Darker background for contact message */
+            color: #e0e0e0; /* Light text */
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background-color: #252525; /* Darker footer background */
+            border-top: 1px solid #333;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #444; /* Darker border for input */
+            border-radius: 5px;
+            background-color: #1e1e1e; /* Input background */
+            color: #e0e0e0; /* Light text */
+            outline: none;
+        }
+
+        .input-container button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #25d366; /* WhatsApp green for buttons */
+            color: #000; /* Dark text for contrast */
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #1da955; /* Darker green on hover */
+        }
+
+        .emoji-container {
+            padding: 10px;
+            background-color: #181818; /* Dark background for emoji container */
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        .emoji-container span {
+            font-size: 24px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .emoji-container span:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-page">
+        <h1>Chat </h1>
+        <div class="messages">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+            <button onclick="toggleEmoji()">😊</button>
+        </div>
+        <div id="emoji-container" class="emoji-container" style="display:none;">
+            <span onclick="addEmoji('😊')">😊</span>
+            <span onclick="addEmoji('😂')">😂</span>
+            <span onclick="addEmoji('❤️')">❤️</span>
+            <span onclick="addEmoji('👍')">👍</span>
+            <span onclick="addEmoji('😢')">😢</span>
+        </div>
+    </div>
+
+    <script>
+        let isUserMessage = true;
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            if (message) {
+                const messagesDiv = document.querySelector('.messages');
+                const newMessage = document.createElement('p');
+                newMessage.innerText = message;
+                newMessage.className = isUserMessage ? 'user-message' : 'contact-message';
+                messagesDiv.appendChild(newMessage);
+                input.value = '';
+                isUserMessage = !isUserMessage;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
+            }
+        }
+
+        function toggleEmoji() {
+            const emojiContainer = document.getElementById('emoji-container');
+            if (emojiContainer.style.display === 'none') {
+                emojiContainer.style.display = 'block';
+            } else {
+                emojiContainer.style.display = 'none';
+            }
+        }
+
+        function addEmoji(emoji) {
+            const input = document.getElementById('message-input');
+            input.value += emoji;
+        }
+    </script>
+</body>
+</html>
+

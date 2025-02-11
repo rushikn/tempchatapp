@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calling</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .call-container {
+            height: 100%;
+            width: 400px; /* Set a fixed width */
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10px;
+        }
+
+        .top-section {
+            text-align: center;
+        }
+
+        h1 {
+            color: #25d366;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .dp {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        button {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1da955;
+        }
+    </style>
+</head>
+<body>
+    <div class="call-container">
+        <!-- Top Section -->
+        <div class="top-section">
+            <p id="name"></p>
+            <img id="dp" src="" alt="User" class="dp">
+        </div>
+        
+        <!-- Calling Text -->
+        <h1>Calling...</h1>
+        
+        <!-- Button Section -->
+        <button onclick="window.history.back()">End Call</button>
+    </div>
+
+    <script>
+        // Get query parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const dp = urlParams.get('dp');
+
+        // Populate the data on the page
+        document.getElementById('name').innerText = name;
+        document.getElementById('dp').src = dp;
+    </script>
+</body>
+</html>
